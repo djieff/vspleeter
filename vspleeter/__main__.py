@@ -6,8 +6,8 @@ import subprocess
 
 import itertools
 
-from PySide2 import QtCore
-from PySide2.QtWidgets import QApplication
+from PySide2.QtCore import Qt, QCoreApplication
+from PySide2.QtWidgets import QApplication, QFileDialog
 from PySide2.QtUiTools import QUiLoader
 
 BASE_COMMAND = "{binaryName} separate -i {inputFilePath} -p spleeter:{stemNum}stems -o {outputDir}"
@@ -17,7 +17,7 @@ OUTPUT_PATH_SUFFIX = "{rootOutputDir}/{basename}_spleeted/{binaryType}/{stemNum}
 def main():
     """main function
     """
-    QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_ShareOpenGLContexts)
+    QCoreApplication.setAttribute(Qt.AA_ShareOpenGLContexts)
 
     app = QApplication(sys.argv)
     app.setOrganizationName("djieffx")
@@ -109,6 +109,22 @@ def main():
             cmd = cmd.split(' ')
             yield cmd
 
+    def browseForInputFile(_):
+        """Opens a file browser, and set the input file
+
+        :param _: unused
+        """
+        inputFile = QFileDialog.getOpenFileName()[0]
+        mw.inputFileLineEdit.setText(inputFile)
+
+    def browseForOutputDir(_):
+        """Opens a file browser, and set the input file
+
+        :param _: unused
+        """
+        outputDir = QFileDialog.getExistingDirectory()
+        mw.outputDirLineEdit.setText(outputDir)
+
     def processBatchElements(_):
         """Process all the data from the UI, and execute all the commands generated
 
@@ -124,15 +140,30 @@ def main():
             binaryGenerator, inputFilePath, stemsCPUGenerator, stemsGPUGenerator, rootOutputDir
         )
 
+        generatedCmds, generatedCmdsForLength = itertools.tee(generatedCmds)
+
+        amountOfCommands = 0
+        for _ in generatedCmdsForLength:
+            amountOfCommands += 1
+
+        mw.progressBar.setRange(0, amountOfCommands)
+        mw.progressBar.setValue(0)
+        mw.resultTextEdit.setText('')
+
         for cmd in generatedCmds:
             prettyCmd = ' '.join(cmd)
-            print("######### executing: ##########\n\n{0}\n\n@@@@@@@@@@".format(prettyCmd))
+            currentJobCount = mw.progressBar.value()
             subprocess.run(cmd)
-            print("Command Success\n\n")
+            mw.progressBar.setValue(currentJobCount + 1)
+            mw.resultTextEdit.append('Success: ' + prettyCmd)
+            mw.resultTextEdit.append('')
 
-        print("All Operations Successful")
-
+    mw.inputFilePushButton.clicked.connect(browseForInputFile)
+    mw.outputDirPushButton.clicked.connect(browseForOutputDir)
     mw.processPushButton.clicked.connect(processBatchElements)
     mw.show()
-    app.exec_()
+    sys.exit(app.exec_())
+
+
+if __name__ == "__main__":
     main()

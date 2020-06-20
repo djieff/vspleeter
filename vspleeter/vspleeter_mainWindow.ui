@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>832</width>
-    <height>551</height>
+    <width>817</width>
+    <height>860</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>vspleeter</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>541</width>
+      <width>801</width>
       <height>471</height>
      </rect>
     </property>
@@ -29,9 +29,23 @@
        <property name="title">
         <string>Audio File to convert</string>
        </property>
-       <layout class="QVBoxLayout" name="verticalLayout_2">
+       <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="QLineEdit" name="inputFileLineEdit"/>
+         <widget class="QPushButton" name="inputFilePushButton">
+          <property name="text">
+           <string>Browse</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="inputFileLineEdit">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+          <property name="placeholderText">
+           <string>&lt;Browse to select a file to separate&gt;</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -109,9 +123,20 @@
        <property name="title">
         <string>Output Directory</string>
        </property>
-       <layout class="QVBoxLayout" name="verticalLayout_5">
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
-         <widget class="QLineEdit" name="outputDirLineEdit"/>
+         <widget class="QPushButton" name="outputDirPushButton">
+          <property name="text">
+           <string>Browse</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="outputDirLineEdit">
+          <property name="placeholderText">
+           <string>&lt;Browse to select an output directory&gt;</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -125,13 +150,39 @@
      </item>
     </layout>
    </widget>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>490</y>
+      <width>801</width>
+      <height>301</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <widget class="QProgressBar" name="progressBar">
+       <property name="value">
+        <number>0</number>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTextEdit" name="resultTextEdit">
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>832</width>
+     <width>817</width>
      <height>22</height>
     </rect>
    </property>
@@ -159,18 +210,6 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-  </widget>
-  <widget class="QDockWidget" name="logDockWidget">
-   <attribute name="dockWidgetArea">
-    <number>2</number>
-   </attribute>
-   <widget class="QWidget" name="dockWidgetContents">
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QTextEdit" name="logTextEdit"/>
-     </item>
-    </layout>
-   </widget>
   </widget>
  </widget>
  <resources/>
