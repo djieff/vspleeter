@@ -133,6 +133,9 @@
         </item>
         <item>
          <widget class="QLineEdit" name="outputDirLineEdit">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
           <property name="placeholderText">
            <string>&lt;Browse to select an output directory&gt;</string>
           </property>

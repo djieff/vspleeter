@@ -1,5 +1,6 @@
 """UI Wrapper script over the "spleeter separate" command
 """
+import glob
 import os
 import sys
 import subprocess
@@ -149,13 +150,18 @@ def main():
         mw.progressBar.setRange(0, amountOfCommands)
         mw.progressBar.setValue(0)
         mw.resultTextEdit.setText('')
+        mw.resultTextEdit.append('Source File: %s' % inputFilePath)
 
         for cmd in generatedCmds:
-            prettyCmd = ' '.join(cmd)
             currentJobCount = mw.progressBar.value()
             subprocess.run(cmd)
+
             mw.progressBar.setValue(currentJobCount + 1)
-            mw.resultTextEdit.append('Success: ' + prettyCmd)
+
+            mw.resultTextEdit.append('Output %s:' % cmd[5].split(':')[1])
+            outputFiles = glob.glob(os.path.join(cmd[7], '*', '*'))
+            for outputFile in outputFiles:
+                mw.resultTextEdit.append(outputFile)
             mw.resultTextEdit.append('')
 
     mw.inputFilePushButton.clicked.connect(browseForInputFile)
