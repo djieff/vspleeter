@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>vspleeter</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="vspleeter_resources.qrc">
+    <normaloff>:/AppIcons/vspleeter.png</normaloff>:/AppIcons/vspleeter.png</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
@@ -194,13 +198,7 @@
      <string>&amp;File</string>
     </property>
    </widget>
-   <widget class="QMenu" name="menu_Edit">
-    <property name="title">
-     <string>&amp;Edit</string>
-    </property>
-   </widget>
    <addaction name="menu_File"/>
-   <addaction name="menu_Edit"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">
@@ -215,6 +213,8 @@
    </attribute>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="vspleeter_resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
