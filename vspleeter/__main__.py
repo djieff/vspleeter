@@ -12,6 +12,9 @@ from PySide2.QtWidgets import QApplication, QFileDialog
 from PySide2.QtUiTools import QUiLoader
 
 BASE_COMMAND = "{binaryName} separate -i {inputFilePath} -p spleeter:{stemNum}stems -o {outputDir}"
+BASE_COMMAND_WIN = (
+    "python -m {binaryName} separate -i {inputFilePath} -p spleeter:{stemNum}stems -o {outputDir}"
+)
 OUTPUT_PATH_SUFFIX = "{rootOutputDir}/{basename}_spleeted/{binaryType}/{stemNum}stems/"
 
 
@@ -106,7 +109,10 @@ def main():
         for stemNum in stemsGenerator:
             cmdSpecs['stemNum'] = stemNum
             cmdSpecs['outputDir'] = createOutputDir(cmdSpecs)
-            cmd = BASE_COMMAND.format(**cmdSpecs)
+            if os.name == 'nt':
+                cmd = BASE_COMMAND_WIN.format(**cmdSpecs)
+            else:
+                cmd = BASE_COMMAND.format(**cmdSpecs)
             cmd = cmd.split(' ')
             yield cmd
 
