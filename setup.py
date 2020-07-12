@@ -12,13 +12,13 @@ test_requirements = ['pytest>=3', ]
 setup(
     author="Jean-Francois Bouchard",
     author_email='bouchard.jfrancois@gmail.com',
-    python_requires='>=3.6',
+    python_requires='>=3.7',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
-        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.7.4',
     ],
     description="GUI wrapper of spleeter separate command.",
     entry_points={
@@ -37,6 +37,6 @@ setup(
     test_suite='tests',
     tests_require=test_requirements,
     url='https://github.com/djieff/vspleeter',
-    version='0.1.0',
+    version='1.0.0',
     zip_safe=False,
 )
