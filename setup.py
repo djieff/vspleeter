@@ -18,7 +18,7 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
-        'Programming Language :: Python :: 3.7.4',
+        'Programming Language :: Python :: 3.7',
     ],
     description="GUI wrapper of spleeter separate command.",
     entry_points={
