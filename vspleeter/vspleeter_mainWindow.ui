@@ -14,8 +14,8 @@
    <string>vspleeter</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="vspleeter_resources.qrc">
-    <normaloff>:/AppIcons/vspleeter.png</normaloff>:/AppIcons/vspleeter.png</iconset>
+   <iconset>
+    <normaloff>vspleeter.png</normaloff>vspleeter.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="layoutWidget">
@@ -213,8 +213,6 @@
    </attribute>
   </widget>
  </widget>
- <resources>
-  <include location="vspleeter_resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
