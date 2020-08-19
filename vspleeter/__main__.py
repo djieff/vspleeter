@@ -11,10 +11,6 @@ from PySide2.QtCore import Qt, QCoreApplication
 from PySide2.QtWidgets import QApplication, QFileDialog
 from PySide2.QtUiTools import QUiLoader
 
-BASE_COMMAND = "{binaryName} separate -i {inputFilePath} -p spleeter:{stemNum}stems -o {outputDir}"
-BASE_COMMAND_WIN = (
-    "python -m {binaryName} separate -i {inputFilePath} -p spleeter:{stemNum}stems -o {outputDir}"
-)
 OUTPUT_PATH_SUFFIX = "{rootOutputDir}/{basename}_spleeted/{binaryType}/{stemNum}stems/"
 
 
@@ -108,12 +104,22 @@ def main():
         stemsGenerator = cmdSpecs['stemsGenerator']
         for stemNum in stemsGenerator:
             cmdSpecs['stemNum'] = stemNum
-            cmdSpecs['outputDir'] = createOutputDir(cmdSpecs)
+            outputDir = createOutputDir(cmdSpecs)
             if os.name == 'nt':
-                cmd = BASE_COMMAND_WIN.format(**cmdSpecs)
+                cmd = [
+                    "python", "-m",
+                    "{}".format(cmdSpecs['binaryName']), "separate",
+                    "-i", "{}".format(cmdSpecs['inputFilePath']),
+                    "-p", "spleeter:{}stems".format(cmdSpecs['stemNum']),
+                    "-o", "{}".format(outputDir)
+                ]
             else:
-                cmd = BASE_COMMAND.format(**cmdSpecs)
-            cmd = cmd.split(' ')
+                cmd = [
+                    "{}".format(cmdSpecs['binaryName']), "separate",
+                    "-i", "{}".format(cmdSpecs['inputFilePath']),
+                    "-p", "spleeter:{}stems".format(cmdSpecs['stemNum']),
+                    "-o", "{}".format(outputDir)
+                ]
             yield cmd
 
     def browseForInputFile(_):
