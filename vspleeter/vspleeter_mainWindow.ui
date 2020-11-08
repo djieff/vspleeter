@@ -197,6 +197,7 @@
     <property name="title">
      <string>&amp;File</string>
     </property>
+    <addaction name="actionexit"/>
    </widget>
    <addaction name="menu_File"/>
   </widget>
@@ -212,6 +213,11 @@
     <bool>false</bool>
    </attribute>
   </widget>
+  <action name="actionexit">
+   <property name="text">
+    <string>exit</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

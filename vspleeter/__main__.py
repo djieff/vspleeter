@@ -2,6 +2,7 @@
 """
 import glob
 import os
+import signal
 import sys
 import subprocess
 
@@ -17,6 +18,9 @@ OUTPUT_PATH_SUFFIX = "{rootOutputDir}/{basename}_spleeted/{binaryType}/{stemNum}
 def main():
     """main function
     """
+    # Adds Ctrl+C support to kill app
+    signal.signal(signal.SIGINT, signal.SIG_DFL)
+
     QCoreApplication.setAttribute(Qt.AA_ShareOpenGLContexts)
 
     app = QApplication(sys.argv)
@@ -179,6 +183,7 @@ def main():
     mw.inputFilePushButton.clicked.connect(browseForInputFile)
     mw.outputDirPushButton.clicked.connect(browseForOutputDir)
     mw.processPushButton.clicked.connect(processBatchElements)
+    mw.actionexit.triggered.connect(app.quit)
     mw.show()
     sys.exit(app.exec_())
 
