@@ -133,6 +133,7 @@ def main():
         """
         inputFile = QFileDialog.getOpenFileName()[0]
         mw.inputFileLineEdit.setText(inputFile)
+        checkToEnableProcess()
 
     def browseForOutputDir(_):
         """Opens a file browser, and set the input file
@@ -141,6 +142,37 @@ def main():
         """
         outputDir = QFileDialog.getExistingDirectory()
         mw.outputDirLineEdit.setText(outputDir)
+        checkToEnableProcess()
+
+    def checkToEnableProcess():
+        """If all the necessary params are set, enable the process button"""
+        mw.processPushButton.setEnabled(False)
+
+        inputFileCheck = bool(mw.inputFileLineEdit.text())
+        procCheck = any(
+            [
+                mw.cpuCheckBox.checkState(),
+                mw.gpuCheckBox.checkState(),
+            ]
+        )
+        stemsCheck = any(
+            [
+                mw.stems2CheckBox.checkState(),
+                mw.stems4CheckBox.checkState(),
+                mw.stems5CheckBox.checkState(),
+            ]
+        )
+        outputFileCheck = bool(mw.outputDirLineEdit.text())
+
+        if all(
+                [
+                    inputFileCheck,
+                    procCheck,
+                    stemsCheck,
+                    outputFileCheck,
+                ]
+        ):
+            mw.processPushButton.setEnabled(True)
 
     def processBatchElements(_):
         """Process all the data from the UI, and execute all the commands generated
@@ -180,8 +212,18 @@ def main():
                 mw.resultTextEdit.append(outputFile)
             mw.resultTextEdit.append('')
 
+    checkToEnableProcess()
+
     mw.inputFilePushButton.clicked.connect(browseForInputFile)
     mw.outputDirPushButton.clicked.connect(browseForOutputDir)
+
+    mw.cpuCheckBox.stateChanged.connect(checkToEnableProcess)
+    mw.gpuCheckBox.stateChanged.connect(checkToEnableProcess)
+
+    mw.stems2CheckBox.stateChanged.connect(checkToEnableProcess)
+    mw.stems4CheckBox.stateChanged.connect(checkToEnableProcess)
+    mw.stems5CheckBox.stateChanged.connect(checkToEnableProcess)
+
     mw.processPushButton.clicked.connect(processBatchElements)
     mw.actionexit.triggered.connect(app.quit)
     mw.show()
