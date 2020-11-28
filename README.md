@@ -46,3 +46,8 @@ Press the process button
 ##### Expected Result
 Once the Process button is pressed, all the required operations will be running in your shell.
 All the output directories will then be listed.
+
+##### Icon Copyright
+split by ImageCatalog from the Noun Project
+
+https://thenounproject.com/

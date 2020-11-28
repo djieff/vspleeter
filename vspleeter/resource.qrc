@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>vspleeter_icon.png</file>
+  </qresource>
+</RCC>

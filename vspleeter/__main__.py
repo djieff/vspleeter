@@ -11,6 +11,9 @@ import itertools
 from PySide2.QtCore import Qt, QCoreApplication
 from PySide2.QtWidgets import QApplication, QFileDialog
 from PySide2.QtUiTools import QUiLoader
+from PySide2.QtGui import QIcon
+
+from . import vspleeter_qrc
 
 OUTPUT_PATH_SUFFIX = "{rootOutputDir}/{basename}_spleeted/{binaryType}/{stemNum}stems/"
 
@@ -28,6 +31,7 @@ def main():
     app.setApplicationName("vspleeter")
     loader = QUiLoader()
     mw = loader.load(os.path.join(os.path.dirname(__file__), "vspleeter_mainWindow.ui"))
+    mw.setWindowIcon(QIcon(":/icons/vspleeter_icon.png"))
 
     def getBinaries():
         """Create a generator that yield the proper command name if the checkbox is checked.
