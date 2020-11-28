@@ -1,2 +1,5 @@
 include vspleeter/vspleeter.png
 include vspleeter/vspleeter_mainWindow.ui
+include vspleeter/vspleeter_icons.png
+include vspleeter/vspleeter_qrc.py
+include vspleeter/resource.qrc

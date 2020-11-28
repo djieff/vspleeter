@@ -13,10 +13,6 @@
   <property name="windowTitle">
    <string>vspleeter</string>
   </property>
-  <property name="windowIcon">
-   <iconset>
-    <normaloff>vspleeter.png</normaloff>vspleeter.png</iconset>
-  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
@@ -208,6 +204,8 @@
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
  <connections/>
 </ui>
